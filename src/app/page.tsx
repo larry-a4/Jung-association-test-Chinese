@@ -29,6 +29,7 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [story, setStory] = useState('');
   const [isComplete, setIsComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // 在组件加载时随机选择7个词语
@@ -55,6 +56,7 @@ export default function Home() {
 
   const generateStory = async (words: string[]) => {
     try {
+      setIsLoading(true);
       const response = await fetch('/api/generate-story', {
         method: 'POST',
         headers: {
@@ -70,6 +72,8 @@ export default function Home() {
     } catch (error) {
       console.error('Error generating story:', error);
       setStory('抱歉，生成故事时出现错误。');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -95,7 +99,14 @@ export default function Home() {
             ))}
           </div>
           <h2 className="text-xl font-semibold mb-4">基于你的联想词的故事：</h2>
-          <p className="text-gray-700 whitespace-pre-wrap">{story}</p>
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+              <p className="text-gray-600">正在生成故事，请稍候...</p>
+            </div>
+          ) : (
+            <p className="text-gray-700 whitespace-pre-wrap">{story}</p>
+          )}
         </div>
       </main>
     );
