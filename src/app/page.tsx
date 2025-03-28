@@ -31,9 +31,9 @@ export default function Home() {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // 在组件加载时随机选择10个词语
-    setSelectedWords(getRandomWords(allWords, 10));
-    setCurrentWord(getRandomWords(allWords, 10)[0]);
+    // 在组件加载时随机选择15个词语
+    setSelectedWords(getRandomWords(allWords, 15));
+    setCurrentWord(getRandomWords(allWords, 15)[0]);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,7 +44,7 @@ export default function Home() {
     setResponses(newResponses);
     setUserInput('');
 
-    if (currentStep < 9) {
+    if (currentStep < 14) {
       setCurrentStep(currentStep + 1);
       setCurrentWord(selectedWords[currentStep + 1]);
     } else {
@@ -60,10 +60,7 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          testWords: selectedWords,
-          associationWords: words 
-        }),
+        body: JSON.stringify({ words }),
       });
       const data = await response.json();
       setStory(data.story);
@@ -106,11 +103,11 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6">荣格词语联想测试</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <div className="mb-6">
-          <p className="text-sm text-gray-600 mb-2">进度：{currentStep + 1}/10</p>
+          <p className="text-sm text-gray-600 mb-2">进度：{currentStep + 1}/15</p>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full"
-              style={{ width: `${((currentStep + 1) / 10) * 100}%` }}
+              style={{ width: `${((currentStep + 1) / 15) * 100}%` }}
             ></div>
           </div>
         </div>
