@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 荣格词语联想测试
 
-## Getting Started
+这是一个基于 Next.js 开发的荣格词语联想测试应用。该应用实现了荣格设计的词语联想测试，通过分析用户对特定词语的联想反应来探索潜意识。
 
-First, run the development server:
+## 功能特点
 
+- 使用荣格标准100个测试词语的中文翻译
+- 随机选择20个不重复的测试词语
+- 实时进度显示
+- 响应式设计，支持各种设备
+- 使用 OpenAI API 生成基于用户联想词的故事
+- 测试完成后展示完整的测试词语和联想词对照
+
+## 技术栈
+
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- OpenAI API
+- React Hooks
+
+## 安装步骤
+
+1. 克隆项目
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [项目地址]
+cd jung-association-test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 安装依赖
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. 配置环境变量
+- 复制 `.env.local.example` 文件为 `.env.local`
+- 在 `.env.local` 文件中设置你的 OpenAI API 密钥：
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. 运行开发服务器
+```bash
+npm run dev
+```
 
-## Learn More
+5. 在浏览器中访问 `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+## 使用说明
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 系统会在测试开始时随机选择20个不重复的测试词语
+2. 对于每个测试词语：
+   - 系统会展示词语
+   - 输入你想到的第一个词
+   - 点击提交或按回车键
+3. 完成20个词语后，系统会：
+   - 显示所有测试词语
+   - 显示你的所有联想词
+   - 生成一个包含所有联想词的故事
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 测试词语说明
 
-## Deploy on Vercel
+测试使用荣格设计的100个标准词语的中文翻译，包括：
+- 具体名词（如：头、水、树等）
+- 抽象概念（如：骄傲、焦虑、纯洁等）
+- 动作（如：唱歌、跳舞、游泳等）
+- 形容词（如：友好、生气、悲伤等）
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 注意事项
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 请确保有稳定的网络连接
+- 需要有效的 OpenAI API 密钥才能使用故事生成功能
+- 建议在安静的环境中进行测试
+- 请如实记录第一个联想到的词，不要过度思考
+
+## 开发说明
+
+- 使用 `npm run dev` 启动开发服务器
+- 使用 `npm run build` 构建生产版本
+- 使用 `npm run start` 启动生产服务器
+- 使用 `npm run lint` 运行代码检查
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request 来改进这个项目。
+
+## 许可证
+
+MIT License
