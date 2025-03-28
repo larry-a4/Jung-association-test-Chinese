@@ -1,9 +1,4 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function POST(request: Request) {
   try {
@@ -24,23 +19,31 @@ ${testWords.map((word: string, index: number) => `${word} → ${associationWords
 7. 在故事中，测试词和联想词要形成有意义的关联
 请用中文写作。`;
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: "你是一个专业的故事创作者，善于将看似不相关的词语编织成有趣的故事，并能够深入理解词语之间的心理关联。你特别擅长将相关的词语组合在相近的位置，使故事更加连贯和生动。"
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 1000,
+    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: [
+          {
+            role: "system",
+            content: "你是一个专业的故事创作者，善于将看似不相关的词语编织成有趣的故事，并能够深入理解词语之间的心理关联。你特别擅长将相关的词语组合在相近的位置，使故事更加连贯和生动。"
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 1000,
+      }),
     });
 
-    const story = completion.choices[0].message.content;
+    const data = await response.json();
+    const story = data.choices[0].message.content;
 
     return NextResponse.json({ story });
   } catch (error) {
