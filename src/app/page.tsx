@@ -31,9 +31,9 @@ export default function Home() {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // 在组件加载时随机选择15个词语
-    setSelectedWords(getRandomWords(allWords, 15));
-    setCurrentWord(getRandomWords(allWords, 15)[0]);
+    // 在组件加载时随机选择7个词语
+    setSelectedWords(getRandomWords(allWords, 7));
+    setCurrentWord(getRandomWords(allWords, 7)[0]);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,7 +44,7 @@ export default function Home() {
     setResponses(newResponses);
     setUserInput('');
 
-    if (currentStep < 14) {
+    if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
       setCurrentWord(selectedWords[currentStep + 1]);
     } else {
@@ -76,7 +76,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-6">测试完成！</h1>
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">测试词语：</h2>
-          <div className="grid grid-cols-5 gap-2 mb-6">
+          <div className="grid grid-cols-4 gap-2 mb-6">
             {selectedWords.map((word, index) => (
               <div key={index} className="bg-gray-100 p-2 rounded text-center">
                 {word}
@@ -84,7 +84,7 @@ export default function Home() {
             ))}
           </div>
           <h2 className="text-xl font-semibold mb-4">你的联想词：</h2>
-          <div className="grid grid-cols-5 gap-2 mb-6">
+          <div className="grid grid-cols-4 gap-2 mb-6">
             {responses.map((word, index) => (
               <div key={index} className="bg-gray-100 p-2 rounded text-center">
                 {word}
@@ -103,11 +103,11 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6">荣格词语联想测试</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <div className="mb-6">
-          <p className="text-sm text-gray-600 mb-2">进度：{currentStep + 1}/15</p>
+          <p className="text-sm text-gray-600 mb-2">进度：{currentStep + 1}/7</p>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-blue-600 h-2 rounded-full"
-              style={{ width: `${((currentStep + 1) / 15) * 100}%` }}
+              style={{ width: `${((currentStep + 1) / 7) * 100}%` }}
             ></div>
           </div>
         </div>
