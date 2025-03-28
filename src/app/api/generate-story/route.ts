@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     请用中文写作。`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
