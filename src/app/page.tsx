@@ -60,7 +60,10 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ words }),
+        body: JSON.stringify({ 
+          testWords: selectedWords,
+          associationWords: words 
+        }),
       });
       const data = await response.json();
       setStory(data.story);
