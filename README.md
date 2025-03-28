@@ -8,7 +8,7 @@
 - 随机选择15个不重复的测试词语
 - 实时进度显示
 - 响应式设计，支持各种设备
-- 使用 OpenAI API 生成基于用户联想词的故事
+- 使用 DeepSeek API 生成基于用户联想词的故事
 - 测试完成后展示完整的测试词语和联想词对照
 
 ## 技术栈
@@ -16,7 +16,7 @@
 - Next.js 14
 - TypeScript
 - Tailwind CSS
-- OpenAI API
+- DeepSeek API
 - React Hooks
 
 ## 安装步骤
@@ -34,9 +34,9 @@ npm install
 
 3. 配置环境变量
 - 复制 `.env.example` 文件为 `.env`
-- 在 `.env` 文件中设置你的 OpenAI API 密钥：
+- 在 `.env` 文件中设置你的 DeepSeek API 密钥：
 ```
-OPENAI_API_KEY=your_openai_api_key_here
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
 ```
 
 4. 运行开发服务器
@@ -69,7 +69,7 @@ npm run dev
 ## 注意事项
 
 - 请确保有稳定的网络连接
-- 需要有效的 OpenAI API 密钥才能使用故事生成功能
+- 需要有效的 DeepSeek API 密钥才能使用故事生成功能
 - 建议在安静的环境中进行测试
 - 请如实记录第一个联想到的词，不要过度思考
 
